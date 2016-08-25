@@ -1,15 +1,19 @@
 language: node_js
 node_js:
-  - "4"
-  - "5"
-  - "6"
-
+- '4'
+- '5'
+- '6'
 env:
-  - NODE_ENV=test
-
+- NODE_ENV=test
 before_script:
-  - npm i -g coveralls
-
+- npm i -g coveralls
 after_script:
-  - npm run coverage
-  - cat ./coverage/lcov.info | coveralls
+- npm run coverage
+- cat ./coverage/lcov.info | coveralls
+deploy:
+  provider: npm
+  email: m.neundorf@live.de
+  api_key:
+    secure: RhJNoZfXyIJquWKsmV+epsSGM5i6dfqX8Gy/GyC7AAS0XesKMlk4cRpQsQUN2zj3aJdrGQDdHFoe+fxi4xpIOmJJKafsIRSv/WEX9HoOKNBWIRpDFN+iK1wTR2V/wKhk/cWeJadtW5swjssdwRDtacQZEVRus2UoRrWm7PaXziCT21qREnBDny0SdKVra1XF9yQdrYoXaebX0+J0itWnyR5P1zpBaiszCEVydQlXewmX31dtTaslsH7UVAcgr0Pq0uKleXlgtvpj5rX1IuYUFuh6VNc2WGTS8+AiMPT+Ay3jYjV/jb4j+zUCgOuYzzhdKSvMGDyJ/rC+fP9opT7/1j3NO0lGhSZSI562AcYesEVXsQOb0sswnHQgGvXI8EkVqHeRDfhzlpULB2SpBNfw2CBUN7lSQahkCKj92Pg60xNrAEDzr+yfdm4rgkXMc46tIHsQimgmZoq20YQvEMkxsSxwlJs/fNwceztPchpmcjGGzV70kxOaFN5vWsJ0L+6E4rKpDGZXHIMsARDgU9o2C/Ze+claLCy1C8idN/IhDJxhsuGCpxlhAb2JDLrtGMBUVBAUuJuzLf5+LgO6XAKwKO5NWM4nIghZ0jFWJ8BFp4/gZf763ExCnc/7b+xFDvKPydnbhBtBqQNi6Nk0uk15d1c5+b7PeQ7jt+cMMq3njd0=
+  on:
+    tags: true

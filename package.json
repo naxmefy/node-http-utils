@@ -58,10 +58,11 @@
     "koa-bodyparser": "2.2.0",
     "koa-compose": "2.4.0",
     "koa-router": "5.4.0",
-    "mongoose": "4.5.9",
     "mocha": "3.0.2",
+    "mongoose": "4.5.9",
     "nock": "8.0.0",
     "nyc": "8.1.0",
+    "rimraf": "^2.5.4",
     "should": "11.1.0",
     "supertest": "2.0.0"
   }
