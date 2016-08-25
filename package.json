@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf lib",
     "compile": "babel src -d lib --copy-files",
-    "build": "npm run clearn && npm run compile",
+    "build": "npm run clean && npm run compile",
     "coverage": "nyc report --reporter=lcov",
     "lint": "eslint src",
     "lint:fix": "npm run lint -- --fix",
