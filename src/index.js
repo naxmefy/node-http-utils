@@ -1,2 +1,3 @@
+export def from './def'
 export env from './env'
-export def, {Types} from './def'
+export types from './types'

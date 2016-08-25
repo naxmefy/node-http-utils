@@ -1,36 +1,6 @@
-import def, {Types} from '../src/def'
-import should from 'should';
+import def from '../src/def'
 
 describe('Utils: def', function () {
-  describe('Types', function () {
-    describe('defaultFn', function () {
-      it('should return the first parameter', function () {
-        Types.defaultFn(1).should.be.eql(1);
-      });
-    });
-    describe('notImplemented', function () {
-      it('should throw an Error', function () {
-        (function () {
-          Types.notImplemented();
-        }).should.throw();
-      });
-    });
-
-    describe('callback', function () {
-      it('should call callback with error', function () {
-        Types.callback(new Error(), function (err) {
-          err.should.not.be.undefined();
-        });
-      });
-
-      it('should call callback without error', function () {
-        Types.callback(void 0, function (err) {
-          should.not.exists(err);
-        });
-      });
-    });
-  });
-
   it('should return the same object if already defined', function () {
     const x = {ok: 1};
     let o = x;

@@ -1,19 +1,5 @@
 import * as _ from 'lodash'
 
-export const Types = {
-  noop () {
-  },
-  defaultFn (arg) {
-    return arg
-  },
-  callback (err, done) {
-    return err ? done(err) : done()
-  },
-  notImplemented () {
-    throw new Error('not implemented')
-  }
-}
-
 /**
  * If object is undefined or force is true then object becomes def
  * 
