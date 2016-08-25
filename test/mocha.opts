@@ -1,0 +1,8 @@
+--ui bdd
+--reporter list
+--recursive
+--colors
+--timeout 5000
+--compilers js:babel-register
+--require co-mocha
+--require should
