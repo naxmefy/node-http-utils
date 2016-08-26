@@ -6,7 +6,7 @@ export default class ResourceController extends AppController {
     super()
     this.Model = Model
   }
-  
+
   init () {
     super.init()
     this.addFilter(['show', 'update', 'destroy'], 'setDocument')
