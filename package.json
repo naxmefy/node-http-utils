@@ -3,6 +3,14 @@
   "version": "0.2.2",
   "description": "collection of some utils",
   "main": "lib/index.js",
+   "repository": {
+    "type": "git",
+    "url": "git@github.com:naxmefy/node-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/naxmefy/node-utils/issues"
+  },
+  "homepage": "https://github.com/naxmefy/node-utils#readme",
   "scripts": {
     "clean": "rimraf lib",
     "compile": "babel src -d lib --copy-files",
