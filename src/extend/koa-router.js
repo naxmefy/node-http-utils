@@ -18,7 +18,7 @@ export default function koaRouter (KoaRouter) {
       'update',
       'destroy'
     ])
-    
+
     const is = o => _.includes(only, o)
 
     if (is('index')) {

@@ -48,16 +48,16 @@ export default class AppController {
   get automaticResponseOfState () {
     return function *(next) {
       yield next
-      
-      if(this.body instanceof Error) {
+
+      if (this.body instanceof Error) {
         this.throw(this.body)
       }
-      
+
       if (this.controller.autoStateResponse && !this.body) {
-        if(this.state instanceof Error) {
+        if (this.state instanceof Error) {
           this.throw(this.state)
         }
-        
+
         // we send empty arrays, but not empty objects or null or undefined
         if (_.isArray(this.state) === false && (_.isEmpty(this.state) || !this.state)) {
           this.throw(404)
