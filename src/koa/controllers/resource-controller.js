@@ -17,7 +17,7 @@ export default class ResourceController extends AppController {
   }
 
   *create () {
-    const document = new this.controller.Model(this.request.body.fields)
+    const document = new this.controller.Model(this.request.body)
     this.state = yield document.save()
             .catch(error => {
               error.status = 400
@@ -30,7 +30,8 @@ export default class ResourceController extends AppController {
   }
 
   *update () {
-    _.merge(this.request.document, this.request.body.fields)
+    // TODO: maybe we need here another update procedure
+    _.merge(this.request.document, this.request.body)
     this.state = yield this.request.document.save()
             .catch(error => {
               error.status = 400
@@ -43,7 +44,8 @@ export default class ResourceController extends AppController {
   }
 
   *setDocument (next) {
-    this.request.document = yield this.controller.Model.findOneById(this.params.id)
+    this.request.document = yield this.controller.Model
+      .findOne({_id: this.params.id})
     if (this.request.document) yield next
   }
 }

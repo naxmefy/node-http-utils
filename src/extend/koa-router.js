@@ -4,7 +4,8 @@ export default function koaRouter (KoaRouter) {
   /**
    *
    * @param {Class} Model The model class for the controller instance
-   * @param {Class} Controller The controller class which get instantiated
+   * @param {Class} Controller The controller class which get instantiated.
+   * Must be subclass of ResourceController
    * @param {Object} [options]
    * @return {Object} The KoaRouter instance
    */
@@ -17,8 +18,8 @@ export default function koaRouter (KoaRouter) {
       'update',
       'destroy'
     ])
-
-    const is = o => only.includes(o)
+    
+    const is = o => _.includes(only, o)
 
     if (is('index')) {
       this.get(route, instance.run(options.index || 'index'))

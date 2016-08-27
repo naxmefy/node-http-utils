@@ -49,18 +49,20 @@ export default class AppController {
     return function *(next) {
       yield next
       if (this.controller.autoStateResponce) {
-        if (!this.state) {
+        // we send empty arrays, but not empty objects or null or undefined
+        if (_.isArray(this.state) === false && (_.isEmpty(this.state) || !this.state)) {
           this.throw(404)
         }
+
         this.body = this.state
       }
     }
   }
 
-  runAction (action) {
+  run (action) {
     action = _.isFunction(action) ? action.name : action
     return koaCompose([
-      this.controllerMiddleware,
+      this.middleware,
       function *(next) {
         this.action = action
         this.actionName = `${_.findKey(this.app.context.controllers, this.controller)}.${action}`
