@@ -79,6 +79,12 @@ describe('Utils: extend KoaRouter', function () {
       response.body.test.should.be.eql(1)
     })
     
+    it('should response 400 for POST /dummy', function * () {
+      const response = yield request.post('/dummy')
+        .send({test: 'test'})
+      response.status.should.be.eql(400)
+    })
+    
     it('should response 200 for GET /dummy/:id', function * () {
       const doc = yield Model.create({test: 2})
       const response = yield request.get(`/dummy/${doc._id}`)
@@ -96,6 +102,13 @@ describe('Utils: extend KoaRouter', function () {
       response.body.should.have.property('_id')
       response.body.should.have.property('test')
       response.body.test.should.be.eql(4)
+    })
+    
+    it('should response 400 for PUT /dummy/:id', function * () {
+      const doc = yield Model.create({test: 3})
+      const response = yield request.put(`/dummy/${doc._id}`)
+        .send({test: 'test'})
+      response.status.should.be.eql(400)
     })
     
     it('should response 200 for DELETE /dummy/:id', function * () {
