@@ -31,7 +31,7 @@ app.use(router.routes(), router.allowedMethods())
 
 const request = supertest(app.listen())
 
-describe.only('Utils: koa middlewares: error', function () {
+describe('Utils: koa middlewares: error', function () {
   let response = null
   
   beforeEach(function () {
