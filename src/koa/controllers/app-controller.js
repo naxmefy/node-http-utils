@@ -53,7 +53,7 @@ export default class AppController {
         this.throw(this.body)
       }
       
-      if (this.controller.autoStateResponse) {
+      if (this.controller.autoStateResponse && !this.body) {
         if(this.state instanceof Error) {
           this.throw(this.state)
         }
