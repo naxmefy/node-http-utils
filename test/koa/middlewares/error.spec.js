@@ -45,7 +45,10 @@ describe.only('Utils: koa middlewares: error', function () {
     
     it('should response error', function () {
       response.status.should.be.eql(500)
-      console.log(response)
+      response.body.should.have.property('message')
+      response.body.should.have.property('status')
+      response.body.should.have.property('error')
+      response.body.should.have.property('stack')
     })
   })
   
@@ -56,7 +59,10 @@ describe.only('Utils: koa middlewares: error', function () {
     
     it('should response not found', function () {
       response.status.should.be.eql(404)
-      console.log(response)
+      response.body.should.have.property('message')
+      response.body.should.have.property('status')
+      response.body.should.have.property('error')
+      response.body.should.have.property('stack')
     })
   })
   
@@ -67,7 +73,10 @@ describe.only('Utils: koa middlewares: error', function () {
     
     it('should response not found', function () {
       response.status.should.be.eql(404)
-      console.log(response)
+      response.body.should.have.property('message')
+      response.body.should.have.property('status')
+      response.body.should.have.property('error')
+      response.body.should.have.property('stack')
     })
   })
 })
