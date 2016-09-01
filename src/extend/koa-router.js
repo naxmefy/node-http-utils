@@ -1,8 +1,9 @@
 import * as _ from 'lodash'
-
+import def from '../def'
 export default function koaRouter (KoaRouter) {
   /**
    *
+   * @param {String} route The route for the resource
    * @param {Class} Model The model class for the controller instance
    * @param {Class} Controller The controller class which get instantiated.
    * Must be subclass of ResourceController
@@ -11,6 +12,7 @@ export default function koaRouter (KoaRouter) {
    */
   KoaRouter.prototype.resource = function (route, Model, Controller, options) {
     const instance = new Controller(Model)
+    options = def(options, {})
     const only = _.get(options, 'only', [
       'index',
       'create',
@@ -40,6 +42,12 @@ export default function koaRouter (KoaRouter) {
     return this
   }
 
+  /**
+   *
+   * @param {String} scope The scope route
+   * @param {Function} fn The function that get called for the scope
+   * @returns {Object} Returns the instance of the KoaRouter
+   */
   KoaRouter.prototype.scope = function (scope, fn) {
     const router = new KoaRouter({prefix: scope})
     fn.call(router, router)
