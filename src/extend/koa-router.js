@@ -1,19 +1,23 @@
 import * as _ from 'lodash'
 import def from '../def'
+import ResourceController from '../koa/controllers/resource-controller'
 export default function koaRouter (KoaRouter) {
   /**
    *
    * @param {String} route The route for the resource
-   * @param {Class} Model The model class for the controller instance
-   * @param {Class} Controller The controller class which get instantiated.
+   * @param {Object} resourceControllerInstance An instance of ResourceController
    * Must be subclass of ResourceController
    * @param {Object} [options]
    * @return {Object} The KoaRouter instance
    */
-  KoaRouter.prototype.resource = function (route, Model, Controller, options) {
-    const instance = new Controller(Model)
+  KoaRouter.prototype.resource = function (route, resourceControllerInstance, options) {
     if (_.isEmpty(route)) route = '/'
     options = def(options, {})
+
+    if (resourceControllerInstance instanceof ResourceController === false) {
+      throw new Error('IllegalArgumentException')
+    }
+
     const only = _.get(options, 'only', [
       'index',
       'create',
@@ -25,19 +29,19 @@ export default function koaRouter (KoaRouter) {
     const is = o => _.includes(only, o)
 
     if (is('index')) {
-      this.get(route, instance.run(options.index || 'index'))
+      this.get(route, resourceControllerInstance.run(options.index || 'index'))
     }
     if (is('create')) {
-      this.post(route, instance.run(options.create || 'create'))
+      this.post(route, resourceControllerInstance.run(options.create || 'create'))
     }
     if (is('show')) {
-      this.get(`${route}:id`, instance.run(options.show || 'show'))
+      this.get(`${route}:id`, resourceControllerInstance.run(options.show || 'show'))
     }
     if (is('update')) {
-      this.put(`${route}:id`, instance.run(options.update || 'update'))
+      this.put(`${route}:id`, resourceControllerInstance.run(options.update || 'update'))
     }
     if (is('destroy')) {
-      this.delete(`${route}:id`, instance.run(options.destroy || 'destroy'))
+      this.delete(`${route}:id`, resourceControllerInstance.run(options.destroy || 'destroy'))
     }
 
     return this
