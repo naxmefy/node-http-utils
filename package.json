@@ -13,7 +13,7 @@
   "homepage": "https://github.com/naxmefy/node-utils#readme",
   "scripts": {
     "clean": "rimraf lib",
-    "compile": "babel src -d lib --copy-files",
+    "compile": "babel src -d lib --copy-files --source-maps",
     "build": "npm run clean && npm run compile",
     "coverage": "nyc report --reporter=lcov",
     "lint": "eslint src",
