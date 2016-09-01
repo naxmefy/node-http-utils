@@ -26,7 +26,7 @@
       "command": "nyc mocha test",
       "env": {
         "NODE_ENV": "test",
-        "DEBUG": "app:*,test*"
+        "DEBUG": "app:*,test*,koa*"
       }
     }
   },
@@ -69,9 +69,11 @@
     "mocha": "3.0.2",
     "mongoose": "4.5.9",
     "nock": "8.0.0",
+    "normalizeurl": "^1.0.0",
     "nyc": "8.1.0",
     "rimraf": "^2.5.4",
     "should": "11.1.0",
-    "supertest": "2.0.0"
+    "supertest": "2.0.0",
+    "url-join": "^1.1.0"
   }
 }

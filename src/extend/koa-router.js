@@ -1,6 +1,8 @@
 import * as _ from 'lodash'
 import def from '../def'
 import ResourceController from '../koa/controllers/resource-controller'
+import urlJoin from 'url-join'
+
 export default function koaRouter (KoaRouter) {
   /**
    *
@@ -11,9 +13,8 @@ export default function koaRouter (KoaRouter) {
    * @return {Object} The KoaRouter instance
    */
   KoaRouter.prototype.resource = function (route, resourceControllerInstance, options) {
-    if (_.isEmpty(route)) route = '/'
     options = def(options, {})
-
+    if(_.isEmpty(route) || _.first(route) !== '/') route = `/${route}`
     if (resourceControllerInstance instanceof ResourceController === false) {
       throw new Error('IllegalArgumentException')
     }
@@ -29,19 +30,19 @@ export default function koaRouter (KoaRouter) {
     const is = o => _.includes(only, o)
 
     if (is('index')) {
-      this.get(route, resourceControllerInstance.run(options.index || 'index'))
+      this.get(urlJoin(route), resourceControllerInstance.run(options.index || 'index'))
     }
     if (is('create')) {
-      this.post(route, resourceControllerInstance.run(options.create || 'create'))
+      this.post(urlJoin(route), resourceControllerInstance.run(options.create || 'create'))
     }
     if (is('show')) {
-      this.get(`${route}:id`, resourceControllerInstance.run(options.show || 'show'))
+      this.get(urlJoin(route, ':id'), resourceControllerInstance.run(options.show || 'show'))
     }
     if (is('update')) {
-      this.put(`${route}:id`, resourceControllerInstance.run(options.update || 'update'))
+      this.put(urlJoin(route, ':id'), resourceControllerInstance.run(options.update || 'update'))
     }
     if (is('destroy')) {
-      this.delete(`${route}:id`, resourceControllerInstance.run(options.destroy || 'destroy'))
+      this.delete(urlJoin(route, ':id'), resourceControllerInstance.run(options.destroy || 'destroy'))
     }
 
     return this

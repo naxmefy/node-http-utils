@@ -19,7 +19,7 @@ const Model = mongoose.model('KoaRouterResourceDummyModel', new Schema({
 app.use(error({debug: true}))
 app.use(koaBodyparser())
 
-describe('Utils: extend KoaRouter', function () {
+describe.only('Utils: extend KoaRouter', function () {
   before(function * () {
     yield mongoose
       .connect(process.env.MONGODB_URI || 'mongodb://localhost/test')
@@ -34,6 +34,7 @@ describe('Utils: extend KoaRouter', function () {
   let request = null
   before(function () {
     koaRouter(KoaRouter)
+    const instance = new ResourceController(Model)
     router = new KoaRouter()
     router
       .scope('/foo', scopeRouter => {
@@ -41,7 +42,7 @@ describe('Utils: extend KoaRouter', function () {
           this.body = "foobar"
         })
       })
-      .resource('/dummy', Model, ResourceController, {})
+      .resource('/dummy', instance, {})
     app.use(router.routes(), router.allowedMethods())
     request = supertest(app.listen())
   })
