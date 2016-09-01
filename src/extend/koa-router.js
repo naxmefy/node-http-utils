@@ -12,6 +12,7 @@ export default function koaRouter (KoaRouter) {
    */
   KoaRouter.prototype.resource = function (route, Model, Controller, options) {
     const instance = new Controller(Model)
+    if (_.isEmpty(route)) route = '/'
     options = def(options, {})
     const only = _.get(options, 'only', [
       'index',
@@ -30,13 +31,13 @@ export default function koaRouter (KoaRouter) {
       this.post(route, instance.run(options.create || 'create'))
     }
     if (is('show')) {
-      this.get(`${route}/:id`, instance.run(options.show || 'show'))
+      this.get(`${route}:id`, instance.run(options.show || 'show'))
     }
     if (is('update')) {
-      this.put(`${route}/:id`, instance.run(options.update || 'update'))
+      this.put(`${route}:id`, instance.run(options.update || 'update'))
     }
     if (is('destroy')) {
-      this.delete(`${route}/:id`, instance.run(options.destroy || 'destroy'))
+      this.delete(`${route}:id`, instance.run(options.destroy || 'destroy'))
     }
 
     return this
