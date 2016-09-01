@@ -1,17 +1,6 @@
 import * as _ from 'lodash'
 
 /**
- * Clean an mongoose document object from mongoose standard attributes. It uses the toObject method
- * under the hood.
- *
- * @param {Object} object The mongoose document that should be cleared from some fields
- * @returns {Object}
- */
-export function cleanObject (object) {
-  return _.omit(object.toObject(), ['_id', 'id', '__v', 'createdAt', 'updatedAt'])
-}
-
-/**
  * Creates an mongoose schema with a object in a special format.
  *
  * object.attributes => schema attributes {}
@@ -55,7 +44,7 @@ export function cleanObject (object) {
  * @param {Class} Schema the mongoose schema class
  * @returns {Class} The generated schema class
  */
-export function schemaFromObject (object, Schema) {
+export default function schemaFromObject (object, Schema) {
   const attrs = _.get(object, 'attributes', {})
   const opts = _.get(object, 'options', {})
   const schema = new Schema(attrs, opts)
